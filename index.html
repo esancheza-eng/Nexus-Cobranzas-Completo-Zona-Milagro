@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELHYAI · Panel de Accesos — Cobranzas Zona Milagro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0A0F14;
+    --panel: #10171E;
+    --panel-border: #1E2830;
+    --amber: #E8B24C;
+    --amber-dim: #6B5527;
+    --teal: #4FB3A9;
+    --teal-dim: #244A46;
+    --violet: #8D7BE0;
+    --violet-dim: #382F5C;
+    --coral: #DD6B6B;
+    --coral-dim: #5C2F2F;
+    --blue: #5B9BD9;
+    --blue-dim: #24405C;
+    --green: #6FBF73;
+    --green-dim: #2C4A2E;
+    --text: #E7EDF3;
+    --text-dim: #8894A0;
+    --text-faint: #4C5661;
+    --radius: 14px;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    width: 100%;
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(232,178,76,0.05), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(79,179,169,0.06), transparent 45%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 980px;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+  }
+
+  .brand-block .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--teal);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 0 0 rgba(79,179,169,0.6);
+    animation: pulse 2.2s infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(79,179,169,0.55); }
+    70%  { box-shadow: 0 0 0 8px rgba(79,179,169,0); }
+    100% { box-shadow: 0 0 0 0 rgba(79,179,169,0); }
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(28px, 4vw, 38px);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 14.5px;
+    max-width: 460px;
+    line-height: 1.55;
+  }
+
+  .clock-block {
+    text-align: right;
+    font-family: var(--font-mono);
+  }
+
+  .clock-block .clock-time {
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--amber);
+    letter-spacing: 0.02em;
+  }
+
+  .clock-block .clock-date {
+    font-size: 11px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  /* ---------- Route connector ---------- */
+  .route {
+    position: relative;
+    height: 46px;
+    margin-bottom: 4px;
+    display: none;
+  }
+
+  .route svg { width: 100%; height: 100%; display: block; }
+  .route-line {
+    stroke: var(--panel-border);
+    stroke-width: 1.5;
+    fill: none;
+  }
+  .route-line-active {
+    stroke: var(--teal);
+    stroke-width: 1.5;
+    fill: none;
+    stroke-dasharray: 6 10;
+    animation: flow 1.8s linear infinite;
+    opacity: 0.7;
+  }
+  @keyframes flow {
+    to { stroke-dashoffset: -32; }
+  }
+
+  @media (min-width: 720px) {
+    .route { display: block; }
+  }
+
+  /* ---------- Cards ---------- */
+  .modules {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 720px) {
+    .modules { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  }
+
+  .card {
+    position: relative;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 30px 28px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--card-accent, var(--amber)), transparent 70%);
+    opacity: 0.8;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: var(--card-accent, var(--amber));
+    background: #121A22;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mod-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--card-accent, var(--amber));
+    background: color-mix(in srgb, var(--card-accent, var(--amber)) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--card-accent, var(--amber)) 35%, transparent);
+    padding: 4px 9px;
+    border-radius: 6px;
+  }
+
+  .status-tag {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-faint);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .status-tag .dot { width: 5px; height: 5px; background: var(--card-accent, var(--amber)); animation: none; box-shadow: none; }
+
+  .icon-wrap svg { width: 30px; height: 30px; stroke: var(--card-accent, var(--amber)); }
+
+  .card h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 1.25;
+  }
+
+  .card p {
+    color: var(--text-dim);
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+
+  .card-footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid var(--panel-border);
+  }
+
+  .card-url {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 70%;
+  }
+
+  .go {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--card-accent, var(--amber));
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
+  .go svg { width: 13px; height: 13px; transition: transform 0.2s ease; }
+  .card:hover .go svg { transform: translateX(3px); }
+
+  .card.verif { --card-accent: var(--amber); }
+  .card.rutas { --card-accent: var(--teal); }
+  .card.siembra { --card-accent: var(--violet); }
+  .card.markov { --card-accent: var(--coral); }
+  .card.timbradas { --card-accent: var(--blue); }
+  .card.metas { --card-accent: var(--green); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  footer .foot-left {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.04em;
+  }
+
+  footer .foot-left b { color: var(--text-dim); font-weight: 500; }
+
+  footer .foot-right {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="brand-block">
+      <div class="eyebrow"><span class="dot"></span> ELHYAI CONSULTORES · ZONA MILAGRO</div>
+      <h1>Panel de Accesos</h1>
+      <p class="subtitle">Consola central de módulos de cobranza en campo. Selecciona un módulo para abrir el dashboard correspondiente.</p>
+    </div>
+    <div class="clock-block">
+      <div class="clock-time" id="clockTime">--:--:--</div>
+      <div class="clock-date" id="clockDate">— — —</div>
+    </div>
+  </header>
+
+  <div class="route">
+    <svg viewBox="0 0 100 46" preserveAspectRatio="none">
+      <line x1="2" y1="23" x2="98" y2="23" class="route-line"/>
+      <line x1="2" y1="23" x2="98" y2="23" class="route-line-active"/>
+      <circle cx="6" cy="23" r="2" fill="var(--amber)"/>
+      <circle cx="23" cy="23" r="2" fill="var(--teal)"/>
+      <circle cx="40" cy="23" r="2" fill="var(--violet)"/>
+      <circle cx="57" cy="23" r="2" fill="var(--coral)"/>
+      <circle cx="74" cy="23" r="2" fill="var(--blue)"/>
+      <circle cx="91" cy="23" r="2" fill="var(--green)"/>
+    </svg>
+  </div>
+
+  <div class="modules">
+
+    <a class="card verif" href="https://esancheza-eng.github.io/verificacionesmx/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="mod-tag">MOD. 01</span>
+        <span class="status-tag"><span class="dot"></span>ACTIVO</span>
+      </div>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12h4l2-7 4 14 2-7h6"/>
+        </svg>
+      </div>
+      <h2>Pulso de Verificaciones</h2>
+      <p>Productividad y resultado de verificaciones de campo por cobrador: cumplimiento, agencias y detalle diario de clientes visitados.</p>
+      <div class="card-footer">
+        <span class="card-url">esancheza-eng.github.io/verificacionesmx</span>
+        <span class="go">Abrir
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a class="card rutas" href="https://esancheza-eng.github.io/gestionesdiaracobradores/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="mod-tag">MOD. 02</span>
+        <span class="status-tag"><span class="dot"></span>ACTIVO</span>
+      </div>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20l5-16 4 10 3-6 4 12" />
+          <circle cx="4" cy="20" r="1.4" fill="currentColor" stroke="none"/>
+          <circle cx="20" cy="20" r="1.4" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <h2>Secuencia de Visitas por Cobrador</h2>
+      <p>Ruta cronológica de gestiones diarias: horarios de visita, tiempos entre clientes y resumen de jornada por cobrador.</p>
+      <div class="card-footer">
+        <span class="card-url">esancheza-eng.github.io/gestionesdiaracobradores</span>
+        <span class="go">Abrir
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a class="card siembra" href="https://esancheza-eng.github.io/siembra123/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="mod-tag">MOD. 03</span>
+        <span class="status-tag"><span class="dot"></span>ACTIVO</span>
+      </div>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="12" width="4" height="9"/>
+          <rect x="10" y="7" width="4" height="14"/>
+          <rect x="17" y="3" width="4" height="18"/>
+        </svg>
+      </div>
+      <h2>Cartera SIEMBRA 1-2-3</h2>
+      <p>Dashboard ejecutivo de cartera Marcimex: KPIs de saldo, calificación de riesgo, ranking por tienda, cobrador y vendedor, con reportes exportables a Excel.</p>
+      <div class="card-footer">
+        <span class="card-url">esancheza-eng.github.io/siembra123</span>
+        <span class="go">Abrir
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a class="card markov" href="https://esancheza-eng.github.io/provisiontiendasmarkov/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="mod-tag">MOD. 04</span>
+        <span class="status-tag"><span class="dot"></span>ACTIVO</span>
+      </div>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="5" cy="6" r="2.3"/>
+          <circle cx="19" cy="6" r="2.3"/>
+          <circle cx="12" cy="18" r="2.3"/>
+          <path d="M7 7.3l3 8.5M17 7.3l-3 8.5M7.3 6h9.4"/>
+        </svg>
+      </div>
+      <h2>Markov · Zona Quevedo</h2>
+      <p>Análisis de transición de cartera por calificación mensual: % contiene, libera y deteriora por tienda, con evolución histórica de 38 tiendas.</p>
+      <div class="card-footer">
+        <span class="card-url">esancheza-eng.github.io/provisiontiendasmarkov</span>
+        <span class="go">Abrir
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a class="card timbradas" href="https://esancheza-eng.github.io/marcaciones/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="mod-tag">MOD. 05</span>
+        <span class="status-tag"><span class="dot"></span>ACTIVO</span>
+      </div>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/>
+          <circle cx="12" cy="9" r="2.3"/>
+        </svg>
+      </div>
+      <h2>Timbradas Mobile</h2>
+      <p>Mapa de check-ins de cobradores en campo: ubicación, hora y razón de cada marcación, filtrable por cobrador y fecha.</p>
+      <div class="card-footer">
+        <span class="card-url">esancheza-eng.github.io/marcaciones</span>
+        <span class="go">Abrir
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a class="card metas" href="https://esancheza-eng.github.io/nuevametacobranzas/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="mod-tag">MOD. 06</span>
+        <span class="status-tag"><span class="dot"></span>ACTIVO</span>
+      </div>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <circle cx="12" cy="12" r="5"/>
+          <circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <h2>Metas Individuales</h2>
+      <p>Metas por cuartil de % Libera por cobrador frente a la meta corporativa, con evolución mensual y desempeño del coordinador de zona.</p>
+      <div class="card-footer">
+        <span class="card-url">esancheza-eng.github.io/nuevametacobranzas</span>
+        <span class="go">Abrir
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+      </div>
+    </a>
+
+  </div>
+
+  <footer>
+    <div class="foot-left"><b>6</b> módulos conectados · Zona Milagro / Zona Quevedo</div>
+    <div class="foot-right">ELHYAI Consultores & Educación Digital</div>
+  </footer>
+
+</div>
+
+<script>
+  function tick(){
+    const now = new Date();
+    const time = now.toLocaleTimeString('es-EC', { hour: '2-digit', minute:'2-digit', second:'2-digit', hour12:false });
+    const date = now.toLocaleDateString('es-EC', { weekday:'short', day:'2-digit', month:'short', year:'numeric' }).toUpperCase();
+    document.getElementById('clockTime').textContent = time;
+    document.getElementById('clockDate').textContent = date;
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
