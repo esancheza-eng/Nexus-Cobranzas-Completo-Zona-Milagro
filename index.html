@@ -24,6 +24,8 @@
     --blue-dim: #24405C;
     --green: #6FBF73;
     --green-dim: #2C4A2E;
+    --magenta: #D874A6;
+    --magenta-dim: #5C2F49;
     --text: #E7EDF3;
     --text-dim: #8894A0;
     --text-faint: #4C5661;
@@ -285,6 +287,7 @@
   .card.markov { --card-accent: var(--coral); }
   .card.timbradas { --card-accent: var(--blue); }
   .card.metas { --card-accent: var(--green); }
+  .card.recibos { --card-accent: var(--magenta); }
 
   /* ---------- Footer ---------- */
   footer {
@@ -332,12 +335,13 @@
     <svg viewBox="0 0 100 46" preserveAspectRatio="none">
       <line x1="2" y1="23" x2="98" y2="23" class="route-line"/>
       <line x1="2" y1="23" x2="98" y2="23" class="route-line-active"/>
-      <circle cx="6" cy="23" r="2" fill="var(--amber)"/>
-      <circle cx="23" cy="23" r="2" fill="var(--teal)"/>
-      <circle cx="40" cy="23" r="2" fill="var(--violet)"/>
-      <circle cx="57" cy="23" r="2" fill="var(--coral)"/>
-      <circle cx="74" cy="23" r="2" fill="var(--blue)"/>
-      <circle cx="91" cy="23" r="2" fill="var(--green)"/>
+      <circle cx="4" cy="23" r="1.9" fill="var(--amber)"/>
+      <circle cx="19" cy="23" r="1.9" fill="var(--teal)"/>
+      <circle cx="34" cy="23" r="1.9" fill="var(--violet)"/>
+      <circle cx="49" cy="23" r="1.9" fill="var(--coral)"/>
+      <circle cx="64" cy="23" r="1.9" fill="var(--blue)"/>
+      <circle cx="79" cy="23" r="1.9" fill="var(--green)"/>
+      <circle cx="94" cy="23" r="1.9" fill="var(--magenta)"/>
     </svg>
   </div>
 
@@ -473,10 +477,31 @@
       </div>
     </a>
 
+    <a class="card recibos" href="https://esancheza-eng.github.io/reciboscobranzas/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="mod-tag">MOD. 07</span>
+        <span class="status-tag"><span class="dot"></span>ACTIVO</span>
+      </div>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3z"/>
+          <path d="M9 8h6M9 12h6"/>
+        </svg>
+      </div>
+      <h2>Libro de Recibos</h2>
+      <p>Recaudación por recibo cancelado: fecha de pago, agencia, cobrador, cliente y valor, con tendencia diaria/mensual y export a CSV.</p>
+      <div class="card-footer">
+        <span class="card-url">esancheza-eng.github.io/reciboscobranzas</span>
+        <span class="go">Abrir
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+      </div>
+    </a>
+
   </div>
 
   <footer>
-    <div class="foot-left"><b>6</b> módulos conectados · Zona Milagro / Zona Quevedo</div>
+    <div class="foot-left"><b>7</b> módulos conectados · Zona Milagro / Zona Quevedo</div>
     <div class="foot-right">ELHYAI Consultores & Educación Digital</div>
   </footer>
 
