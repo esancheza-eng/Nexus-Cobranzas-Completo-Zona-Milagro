@@ -26,6 +26,8 @@
     --green-dim: #2C4A2E;
     --magenta: #D874A6;
     --magenta-dim: #5C2F49;
+    --orange: #E0793E;
+    --orange-dim: #5C3A1F;
     --text: #E7EDF3;
     --text-dim: #8894A0;
     --text-faint: #4C5661;
@@ -288,6 +290,7 @@
   .card.timbradas { --card-accent: var(--blue); }
   .card.metas { --card-accent: var(--green); }
   .card.recibos { --card-accent: var(--magenta); }
+  .card.procesador { --card-accent: var(--orange); }
 
   /* ---------- Footer ---------- */
   footer {
@@ -336,12 +339,13 @@
       <line x1="2" y1="23" x2="98" y2="23" class="route-line"/>
       <line x1="2" y1="23" x2="98" y2="23" class="route-line-active"/>
       <circle cx="4" cy="23" r="1.9" fill="var(--amber)"/>
-      <circle cx="19" cy="23" r="1.9" fill="var(--teal)"/>
-      <circle cx="34" cy="23" r="1.9" fill="var(--violet)"/>
-      <circle cx="49" cy="23" r="1.9" fill="var(--coral)"/>
-      <circle cx="64" cy="23" r="1.9" fill="var(--blue)"/>
-      <circle cx="79" cy="23" r="1.9" fill="var(--green)"/>
-      <circle cx="94" cy="23" r="1.9" fill="var(--magenta)"/>
+      <circle cx="17" cy="23" r="1.9" fill="var(--teal)"/>
+      <circle cx="30" cy="23" r="1.9" fill="var(--violet)"/>
+      <circle cx="43" cy="23" r="1.9" fill="var(--coral)"/>
+      <circle cx="56" cy="23" r="1.9" fill="var(--blue)"/>
+      <circle cx="69" cy="23" r="1.9" fill="var(--green)"/>
+      <circle cx="82" cy="23" r="1.9" fill="var(--magenta)"/>
+      <circle cx="95" cy="23" r="1.9" fill="var(--orange)"/>
     </svg>
   </div>
 
@@ -498,10 +502,31 @@
       </div>
     </a>
 
+    <a class="card procesador" href="https://esancheza-eng.github.io/listadocobranzas/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="mod-tag">MOD. 08</span>
+        <span class="status-tag"><span class="dot"></span>ACTIVO</span>
+      </div>
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16v4H4zM4 12h10M4 17h7"/>
+          <path d="M17 13l3 3-3 3"/>
+        </svg>
+      </div>
+      <h2>Procesador de Clientes</h2>
+      <p>Filtra la base de clientes por vencimiento, tienda, línea de producto y origen de factura; clasifica cartera en mantiene / mejora / empeora y exporta el resultado a Excel.</p>
+      <div class="card-footer">
+        <span class="card-url">esancheza-eng.github.io/listadocobranzas</span>
+        <span class="go">Abrir
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+      </div>
+    </a>
+
   </div>
 
   <footer>
-    <div class="foot-left"><b>7</b> módulos conectados · Zona Milagro / Zona Quevedo</div>
+    <div class="foot-left"><b>8</b> módulos conectados · Zona Milagro</div>
     <div class="foot-right">ELHYAI Consultores & Educación Digital</div>
   </footer>
 
